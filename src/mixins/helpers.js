@@ -10,7 +10,7 @@ var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(this.refs.list);
-    var trackWidth = this.getWidth(this.refs.track);
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -41,7 +41,7 @@ var helpers = {
     // Refactor it 
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(this.refs.list);
-    var trackWidth = this.getWidth(this.refs.track);
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     this.setState({
@@ -109,14 +109,14 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.children[currentSlide], callback);
+        ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.children[currentSlide], callback);
+        ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       });
 
       if (this.props.beforeChange) {
@@ -212,7 +212,7 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track, callback);
+        ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       };
 
       this.setState({
@@ -220,7 +220,7 @@ var helpers = {
         currentSlide: targetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track, callback);
+        ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       });
 
     }
