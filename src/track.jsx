@@ -90,7 +90,7 @@ var renderSlides = (spec) => {
 
       if (index < infiniteCount) {
         key = count + index;
-        postCloneSlides.push(cloneWithProps(child, {
+        postCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),

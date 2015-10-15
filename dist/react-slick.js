@@ -19782,7 +19782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      if (index < infiniteCount) {
 	        key = count + index;
-	        postCloneSlides.push(cloneWithProps(child, {
+	        postCloneSlides.push(_react2['default'].cloneElement(child, {
 	          key: key,
 	          'data-index': key,
 	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
